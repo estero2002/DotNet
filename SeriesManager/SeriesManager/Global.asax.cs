@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Data.Entity;
+using SeriesManager.Models;
 
 namespace SeriesManager
 {
@@ -31,6 +33,8 @@ namespace SeriesManager
 
         protected void Application_Start()
         {
+            Database.SetInitializer<SeriesManagerEntities>(new SeriesManagerInitializer());
+
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
