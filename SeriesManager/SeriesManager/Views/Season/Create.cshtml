@@ -1,7 +1,7 @@
-﻿@model SeriesManager.Models.Show
+﻿@model SeriesManager.Models.Season
 
 @{
-    ViewBag.Title = "Add Show";
+    ViewBag.Title = "Create";
 }
 
 <h2>Create</h2>
@@ -12,14 +12,22 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Show</legend>
+        <legend>Season</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+            @Html.LabelFor(model => model.ShowID, "Show")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
+            @Html.DropDownList("ShowID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ShowID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Number)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Number)
+            @Html.ValidationMessageFor(model => model.Number)
         </div>
 
         <p>

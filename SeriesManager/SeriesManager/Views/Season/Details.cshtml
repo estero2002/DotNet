@@ -1,0 +1,56 @@
+﻿@model SeriesManager.Models.Season
+
+@{
+    ViewBag.Title = "Season Details";
+}
+
+<h2>Season Details</h2>
+
+<fieldset>
+    <legend>Season</legend>
+
+    <div class="display-label">Show</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Show.Name)
+    </div>
+
+    <div class="display-label">Number</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Number)
+    </div>
+
+    <div class="display-label">
+        @Html.LabelFor(model => model.Episodes)
+    </div>
+    <div class="display-field">
+        <table>
+            <tr>
+                <th>Number</th>
+                <th>Title</th>
+                <th>Airing Date</th>
+                <th>Downloaded Versions</th>
+            </tr>
+            @foreach (var item in Model.Episodes)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AiringDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Downloads.Count)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.SeasonID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

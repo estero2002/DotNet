@@ -1,8 +1,35 @@
-﻿@{
+﻿@model IEnumerable<SeriesManager.ViewModels.EpisodeGroup>
+
+@{
     ViewBag.Title = "About Us";
 }
 
-<h2>About</h2>
-<p>
-     Put content here.
-</p>
+<h2>Shows Statistics</h2>
+
+<table>
+    <tr>
+        <th>
+            Show
+        </th>
+        <th>
+            Aired Episodes
+        </th>
+        <th>
+            Watched Episodes
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Show
+        </td>
+        <td>
+            @item.AiredEpisodesCount
+        </td>
+        <td>
+            @item.WatchedEpisodesCount
+        </td>
+    </tr>
+}
+</table>

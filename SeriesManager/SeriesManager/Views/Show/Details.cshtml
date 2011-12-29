@@ -1,10 +1,10 @@
 ﻿@model SeriesManager.Models.Show
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Show Detail";
 }
 
-<h2>Details</h2>
+<h2>Show Detail</h2>
 
 <fieldset>
     <legend>Show</legend>
@@ -12,6 +12,28 @@
     <div class="display-label">Name</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Name)
+    </div>
+    <div class="display-label">
+        @Html.LabelFor(model => model.Seasons)
+    </div>
+    <div class="display-field">
+        <table>
+            <tr>
+                <th>Number</th>
+                <th>Episodes</th>
+            </tr>
+            @foreach (var item in Model.Seasons)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Number.ToString(), "Details", "Season", new { id = item.SeasonID }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Episodes.Count)
+                    </td>
+                </tr>
+            }
+        </table>
     </div>
 </fieldset>
 <p>

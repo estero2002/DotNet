@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<SeriesManager.Models.Show>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Shows";
 }
 
-<h2>Index</h2>
+<h2>Shows</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -20,11 +20,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.ActionLink(item.Name, "Details", new { id=item.ShowID })
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ShowID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ShowID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ShowID })
         </td>
     </tr>

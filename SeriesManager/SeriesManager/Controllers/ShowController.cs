@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using SeriesManager.Models;
+﻿namespace SeriesManager.Controllers
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
+    using SeriesManager.Models;
 
-namespace SeriesManager.Controllers
-{ 
     public class ShowController : Controller
     {
         private SeriesManagerEntities db = new SeriesManagerEntities();
@@ -40,15 +40,21 @@ namespace SeriesManager.Controllers
 
         //
         // POST: /Show/Create
-
         [HttpPost]
         public ActionResult Create(Show show)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Shows.Add(show);
-                db.SaveChanges();
-                return RedirectToAction("Index");  
+                if (ModelState.IsValid)
+                {
+                    db.Shows.Add(show);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
             return View(show);
@@ -69,33 +75,56 @@ namespace SeriesManager.Controllers
         [HttpPost]
         public ActionResult Edit(Show show)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(show).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(show).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
             return View(show);
         }
 
         //
         // GET: /Show/Delete/5
  
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, bool? saveChangesError)
         {
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Unable to save changes. Try again, and if the problem persists see your system administrator.";
+            }
+
             Show show = db.Shows.Find(id);
             return View(show);
         }
 
         //
         // POST: /Show/Delete/5
-
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
-        {            
-            Show show = db.Shows.Find(id);
-            db.Shows.Remove(show);
-            db.SaveChanges();
+        {
+            try
+            {
+                Show show = db.Shows.Find(id);
+                db.Shows.Remove(show);
+                db.SaveChanges();
+            }
+            catch
+            {
+                return RedirectToAction("Delete", 
+                    new System.Web.Routing.RouteValueDictionary {
+                    { "id", id },
+                    { "saveChangesError", true} });
+            }
+
             return RedirectToAction("Index");
         }
 
