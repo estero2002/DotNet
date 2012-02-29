@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<PlayedSongs.Models.Song>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "PlayedSongs";
 }
 
-<h2>Index</h2>
+<h2>Learned Songs</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Song", "Create")
 </p>
 <table>
     <tr>
@@ -24,10 +24,10 @@
             Learned
         </th>
         <th>
-            TabOrigin
+            Tab From
         </th>
         <th>
-            TabPath
+            Tab Path
         </th>
         <th></th>
     </tr>

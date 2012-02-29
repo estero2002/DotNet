@@ -31,7 +31,7 @@
                 foreach (var season in db.Seasons.Where(s => s.ShowID == show.ShowID))
                 {
                     aired += db.Episodes.Where(e => e.SeasonID == season.SeasonID && e.AiringDate <= DateTime.Now).Count();
-                    watched += db.Episodes.Where(e => e.SeasonID == season.SeasonID && e.WatchedDate <= DateTime.Now).Count();
+                    watched += db.Episodes.Where(e => e.SeasonID == season.SeasonID && e.Watched == true).Count();
                 }
 
                 counter.Add(new EpisodeGroup { Show = show.Name, AiredEpisodesCount = aired, WatchedEpisodesCount = watched });

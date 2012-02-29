@@ -30,7 +30,7 @@
                 <th>Airing Date</th>
                 <th>Downloaded Versions</th>
             </tr>
-            @foreach (var item in Model.Episodes)
+            @foreach (var item in Model.Episodes.OrderBy(p => p.Number))
             {
                 <tr>
                     <td>

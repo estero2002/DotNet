@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Data.Entity;
+using PlayedSongs.Models;
 
 namespace PlayedSongs
 {
@@ -31,6 +33,7 @@ namespace PlayedSongs
 
         protected void Application_Start()
         {
+            Database.SetInitializer<PlayedSongsEntities>(new DropCreateDatabaseIfModelChanges<PlayedSongsEntities>());
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);

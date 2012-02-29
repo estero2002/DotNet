@@ -19,10 +19,10 @@
     <div class="display-field">
         <table>
             <tr>
-                <th>Number</th>
+                <th>Season Number</th>
                 <th>Episodes</th>
             </tr>
-            @foreach (var item in Model.Seasons)
+            @foreach (var item in Model.Seasons.OrderBy(p=> p.Number))
             {
                 <tr>
                     <td>

@@ -13,6 +13,28 @@ section {
     display: block;
 }
 
+table
+{
+    border-collapse: collapse;
+}
+
+th
+{
+    font-size: 14px;
+	font-weight: normal;
+	padding: 6px 8px;
+	border-bottom: 2px solid #ccc;
+    text-align: left;
+    background-color: #ccc;
+}
+
+td
+{
+	border-bottom: 1px solid #ccc;
+	padding: 6px 8px;
+    text-align: left;
+}
+
 /* Styles for basic forms
 -----------------------------------------------------------*/
 

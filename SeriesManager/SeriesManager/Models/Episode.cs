@@ -8,7 +8,9 @@
 
     public class Episode
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int EpisodeID { get; set; }
+        
         public int SeasonID { get; set; }
 
         [Required(ErrorMessage = "Episode number is required")]
@@ -16,11 +18,10 @@
         
         public string Name { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? AiringDate { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
-        public DateTime? WatchedDate { get; set; }
+        public bool Watched { get; set; }
 
         public virtual Season Season { get; set; }
         public virtual ICollection<Download> Downloads { get; set; }
